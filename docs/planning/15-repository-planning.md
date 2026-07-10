@@ -40,6 +40,7 @@ docs/
 │
 ├── architecture/                     # System design
 │   ├── 13-agent-architecture.md
+│   ├── non-functional-requirements.md  # NFR / SLO specification
 │   └── adr/                          # 16 — Architecture Decision Records
 │       ├── README.md                 # ADR index + template
 │       ├── 0001-decision-intelligence-not-dashboards.md

@@ -5,9 +5,15 @@
 > responsibilities, how they communicate, and the diagrams that describe the system. It
 > critically evaluates the suggested agent set and improves it.
 >
-> **Scope note.** This is an architectural blueprint (Phase 0). It specifies design and
-> contracts, not implementation. Technology choices are captured as trade-offs in the
-> [ADRs](adr/README.md) and are deliberately non-binding at this stage.
+> **Scope note.** This is the **logical** architecture blueprint: it specifies the agents,
+> their responsibilities, and their contracts. As of the Phase 0 → Phase 1 boundary, the
+> multi-agent design and orchestration approach are **finalized** in
+> [ADR-0005](adr/0005-multi-agent-orchestration.md) and
+> [ADR-0010](adr/0010-multi-agent-architecture-rationale.md), and the implementation
+> technology stack is **frozen** in [ADR-0009](adr/0009-technology-stack.md). This document
+> is deliberately kept technology-agnostic at the logical level — concrete tooling lives in
+> ADR-0009 — but where a runtime choice is now settled it is annotated inline rather than
+> left open.
 
 ---
 
@@ -161,7 +167,10 @@ flowchart TB
 ### 5.1 Principles
 - **Event/pipeline-oriented, orchestrated.** The Orchestrator sequences the pipeline and
   can run analysis agents in parallel where inputs allow (Forecast, Risk, Analytics all
-  consume the Foundation model).
+  consume the Foundation model). The orchestration runtime is **finalized** as an explicit
+  stateful graph (LangGraph) over reliable asynchronous messaging (RabbitMQ) per
+  [ADR-0009](adr/0009-technology-stack.md), with the rationale in
+  [ADR-0010](adr/0010-multi-agent-architecture-rationale.md).
 - **Contract-first messaging.** Agents communicate via explicit, versioned message
   contracts (schemas), not shared mutable state. This keeps agents independently testable
   and evolvable.
@@ -260,17 +269,22 @@ Concise here; full contracts in the [Agent Catalog](../agents/agent-catalog.md).
 
 ## 7. Cross-Cutting Concerns (non-agent, system-wide)
 
-These are architectural requirements every agent inherits (detailed as
-[non-functional expectations](adr/README.md) and refined in later phases):
+These are architectural requirements every agent inherits (quantified in the
+[Non-Functional Requirements](non-functional-requirements.md) and governed by the ADRs
+referenced below):
 
 - **Explainability enforcement:** contract validation at the Recommendation/Executive
-  boundary rejects outputs missing mandatory elements.
+  boundary rejects outputs missing mandatory elements ([ADR-0004](adr/0004-explainable-ai-mandate.md)).
+- **Governance:** all AI outputs are bound by the platform-wide governance controls in
+  [ADR-0007](adr/0007-ai-governance-framework.md).
 - **Observability:** each agent emits health, latency, and quality telemetry; the
-  Orchestrator aggregates a decision-level trace.
+  Orchestrator aggregates a decision-level trace (targets in
+  [Non-Functional Requirements](non-functional-requirements.md)).
 - **Confidence calibration monitoring:** the Learning Agent monitors whether stated
-  confidence matches realized outcomes.
-- **Security & tenancy:** retailer data is isolated per tenant; least-privilege access to
-  external systems of record (read-oriented by default).
+  confidence matches realized outcomes ([ADR-0007 §3](adr/0007-ai-governance-framework.md#3-confidence-score-methodology)).
+- **Security & tenancy:** retailer data is isolated per tenant with least-privilege,
+  read-oriented access to external systems of record, per
+  [ADR-0008](adr/0008-security-architecture.md).
 - **Extensibility:** new connectors (Integration) and new risk types (Risk Detection) are
   additive and do not require changes to downstream contracts.
 
@@ -292,18 +306,34 @@ These are architectural requirements every agent inherits (detailed as
 
 ---
 
-## 9. Open Architectural Questions (Deferred to Phase 1 Design)
+## 9. Resolved Decisions & Remaining Open Questions
 
-These are intentionally left open here and will be resolved with ADRs during
-implementation planning:
+Several questions that were open at initial authoring have since been **resolved** by later
+ADRs. They are recorded here (rather than deleted) to preserve historical context and to
+keep this document consistent with ADR-0008, ADR-0009, and ADR-0010.
 
-1. Runtime coordination style (pure pipeline vs. event bus vs. workflow engine) — trade-off
-   sketched in [ADR-0005](adr/0005-multi-agent-orchestration.md).
-2. Forecasting method selection strategy (statistical baselines vs. ML, per data density) —
-   see [ADR-0004](adr/0004-explainable-ai-mandate.md) for the explainability constraint
-   that bounds this choice.
-3. Real-time vs. scheduled batch analysis cadence per retailer size.
-4. Deployment model (multi-tenant SaaS vs. isolated) — see
-   [ADR-0006](adr/0006-layer-over-systems-of-record.md).
+**Resolved**
 
-None of these block Phase 0; all are captured so Phase 1 starts with eyes open.
+1. **Runtime coordination style** — *Resolved.* Finalized as an explicit orchestrated
+   stateful graph (LangGraph) over reliable asynchronous messaging (RabbitMQ), per
+   [ADR-0009](adr/0009-technology-stack.md); the multi-agent + orchestration rationale is in
+   [ADR-0010](adr/0010-multi-agent-architecture-rationale.md) (originating decision:
+   [ADR-0005](adr/0005-multi-agent-orchestration.md)). Kafka is the documented high-volume
+   scale path.
+2. **Deployment model** — *Resolved (default set).* Multi-tenant SaaS with per-tenant
+   isolation enforced at the data layer (PostgreSQL row-level security), per
+   [ADR-0008](adr/0008-security-architecture.md) and [ADR-0009](adr/0009-technology-stack.md).
+   Exact topology and sizing are confirmed at Phase 1 kickoff.
+
+**Remaining open (Phase 1 design detail)**
+
+3. **Forecasting method selection strategy** (statistical baselines vs. ML, per data
+   density, including cold-start) — bounded by the explainability constraint in
+   [ADR-0004](adr/0004-explainable-ai-mandate.md); the concrete selection/cold-start policy
+   is a Phase 1 design task.
+4. **Real-time vs. scheduled batch analysis cadence** per retailer size — governed by the
+   latency and freshness targets in the
+   [Non-Functional Requirements](non-functional-requirements.md).
+
+None of these block Phase 0; the resolved items are now consistent with the finalized ADRs,
+and the remaining items are scoped as Phase 1 design detail.

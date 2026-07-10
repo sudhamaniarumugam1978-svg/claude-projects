@@ -64,6 +64,7 @@ rationale, scope, principles, agent architecture, and roadmap.
 | # | Document | Description |
 | --- | --- | --- |
 | 13 | [Agent Architecture](architecture/13-agent-architecture.md) | Enterprise multi-agent design, responsibilities, communication, diagrams |
+| — | [Non-Functional Requirements](architecture/non-functional-requirements.md) | Authoritative NFR/SLO spec: availability, performance, security, DR, data integrity, AI quality |
 | — | [ADR Index](architecture/adr/README.md) | Architecture Decision Records for Phase 0 |
 
 ### `/docs/agents` — Agent Specifications

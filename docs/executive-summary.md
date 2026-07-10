@@ -98,7 +98,14 @@ Systems of Record → Integration → Data Quality → Inventory Intelligence
 
 Explainability is **structural**: recommendations cannot be emitted without reasoning,
 confidence, evidence, and impact ([Agent Architecture](architecture/13-agent-architecture.md),
-[Agent Catalog](agents/agent-catalog.md)).
+[Agent Catalog](agents/agent-catalog.md)). The multi-agent rationale and orchestration
+approach are finalized in [ADR-0010](architecture/adr/0010-multi-agent-architecture-rationale.md).
+The engine operates under a platform-wide **AI Governance Framework**
+([ADR-0007](architecture/adr/0007-ai-governance-framework.md)) and a defense-in-depth
+**Security Architecture** ([ADR-0008](architecture/adr/0008-security-architecture.md)), on a
+**frozen technology stack** ([ADR-0009](architecture/adr/0009-technology-stack.md)). Measurable
+system qualities (availability, latency, RPO/RTO, and more) are specified in the
+[Non-Functional Requirements](architecture/non-functional-requirements.md).
 
 ---
 
@@ -126,9 +133,22 @@ calibration as leading indicators. Full KPI tree in
 
 ## Key Decisions (ADRs)
 
-Six Architecture Decision Records capture the durable "why": decision-intelligence-first,
-disciplined scope, human-in-the-loop, explainable-AI mandate, multi-agent orchestration,
-and layering over systems of record. See the [ADR Index](architecture/adr/README.md).
+**Ten** Architecture Decision Records capture the durable "why" behind StockSense:
+
+| ADR | Decision |
+| --- | --- |
+| [ADR-0001](architecture/adr/0001-decision-intelligence-not-dashboards.md) | Decision Intelligence (not dashboards) |
+| [ADR-0002](architecture/adr/0002-scope-boundaries-not-an-erp.md) | Product Scope Boundaries (not an ERP/POS/IMS/CRM) |
+| [ADR-0003](architecture/adr/0003-human-in-the-loop-decisioning.md) | Human-in-the-Loop |
+| [ADR-0004](architecture/adr/0004-explainable-ai-mandate.md) | Explainable AI |
+| [ADR-0005](architecture/adr/0005-multi-agent-orchestration.md) | Multi-Agent Architecture |
+| [ADR-0006](architecture/adr/0006-layer-over-systems-of-record.md) | Layer Over Existing Systems |
+| [ADR-0007](architecture/adr/0007-ai-governance-framework.md) | AI Governance |
+| [ADR-0008](architecture/adr/0008-security-architecture.md) | Security Architecture |
+| [ADR-0009](architecture/adr/0009-technology-stack.md) | Technology Stack Decisions (frozen for Phase 1) |
+| [ADR-0010](architecture/adr/0010-multi-agent-architecture-rationale.md) | Multi-Agent Architecture Rationale |
+
+See the [ADR Index](architecture/adr/README.md) for summaries and full records.
 
 ---
 
