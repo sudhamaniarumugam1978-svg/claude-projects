@@ -44,7 +44,8 @@ docs/
 │       ├── 0003-human-in-the-loop-decisioning.md
 │       ├── 0004-explainable-ai-mandate.md
 │       ├── 0005-multi-agent-orchestration.md
-│       └── 0006-layer-over-systems-of-record.md
+│       ├── 0006-layer-over-systems-of-record.md
+│       └── 0007-ai-governance-framework.md
 │
 ├── agents/                           # Agent specifications
 │   └── agent-catalog.md

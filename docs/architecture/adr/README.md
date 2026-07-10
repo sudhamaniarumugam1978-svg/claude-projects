@@ -19,6 +19,7 @@ new ADR, but existing ADRs are not rewritten — the history is the value.
 | [0004](0004-explainable-ai-mandate.md) | Explainable-AI mandate (4 mandatory elements) | Accepted | Every recommendation carries reasoning, confidence, evidence, impact |
 | [0005](0005-multi-agent-orchestration.md) | Multi-agent architecture with orchestration | Accepted | 11-agent design with an Orchestrator and added guardian agents |
 | [0006](0006-layer-over-systems-of-record.md) | Layer over existing systems of record | Accepted | Integrate, don't replace; source-agnostic core |
+| [0007](0007-ai-governance-framework.md) | AI Governance Framework | Accepted | Platform-wide controls: grounding, confidence, fallback, override, audit, versioning, traceability, fairness, privacy |
 
 ---
 
