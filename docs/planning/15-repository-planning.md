@@ -45,7 +45,8 @@ docs/
 │       ├── 0004-explainable-ai-mandate.md
 │       ├── 0005-multi-agent-orchestration.md
 │       ├── 0006-layer-over-systems-of-record.md
-│       └── 0007-ai-governance-framework.md
+│       ├── 0007-ai-governance-framework.md
+│       └── 0008-security-architecture.md
 │
 ├── agents/                           # Agent specifications
 │   └── agent-catalog.md
