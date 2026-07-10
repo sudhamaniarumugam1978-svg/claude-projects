@@ -21,6 +21,7 @@ new ADR, but existing ADRs are not rewritten — the history is the value.
 | [0006](0006-layer-over-systems-of-record.md) | Layer over existing systems of record | Accepted | Integrate, don't replace; source-agnostic core |
 | [0007](0007-ai-governance-framework.md) | AI Governance Framework | Accepted | Platform-wide controls: grounding, confidence, fallback, override, audit, versioning, traceability, fairness, privacy |
 | [0008](0008-security-architecture.md) | Security Architecture | Accepted | Defense-in-depth: authN/Z + RBAC, JWT lifecycle, encryption, DB security, OWASP Top 10, rate limiting, audit, backup/DR |
+| [0009](0009-technology-stack.md) | Technology Stack Selection | Accepted (frozen) | Frozen implementation stack across 21 layers (frontend→secrets) with per-technology justification |
 
 ---
 

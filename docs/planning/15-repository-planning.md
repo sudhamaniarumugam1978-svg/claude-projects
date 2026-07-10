@@ -49,7 +49,8 @@ docs/
 │       ├── 0005-multi-agent-orchestration.md
 │       ├── 0006-layer-over-systems-of-record.md
 │       ├── 0007-ai-governance-framework.md
-│       └── 0008-security-architecture.md
+│       ├── 0008-security-architecture.md
+│       └── 0009-technology-stack.md
 │
 ├── agents/                           # Agent specifications
 │   └── agent-catalog.md
