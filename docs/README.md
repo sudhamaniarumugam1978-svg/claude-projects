@@ -81,6 +81,7 @@ rationale, scope, principles, agent architecture, and roadmap.
 | # | Document | Description |
 | --- | --- | --- |
 | 17 | [Executive Summary](executive-summary.md) | One-read overview for reviewers, contributors, and investors |
+| — | [Glossary](glossary.md) | Shared vocabulary across retail, inventory, AI/ML, and engineering |
 
 ---
 

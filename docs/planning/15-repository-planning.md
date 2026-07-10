@@ -16,6 +16,7 @@ numbered where it maps to a numbered deliverable, and cross-linked from the
 docs/
 ├── README.md                         # Documentation index / navigation hub
 ├── executive-summary.md              # 17 — Executive summary
+├── glossary.md                       # Shared terminology
 │
 ├── product/                          # Product definition
 │   ├── 01-product-vision.md
