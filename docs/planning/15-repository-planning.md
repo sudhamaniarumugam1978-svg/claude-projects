@@ -34,7 +34,8 @@ docs/
 ├── business/                         # Business design
 │   ├── 09-business-workflow.md
 │   ├── 11-success-metrics.md
-│   └── data-quality-policy.md
+│   ├── data-quality-policy.md
+│   └── risk-register.md
 │
 ├── architecture/                     # System design
 │   ├── 13-agent-architecture.md

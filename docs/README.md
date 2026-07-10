@@ -58,6 +58,7 @@ rationale, scope, principles, agent architecture, and roadmap.
 | 09 | [Business Workflow](business/09-business-workflow.md) | Supplier → Inventory → Sales → AI → Recommendation → Action |
 | 11 | [Success Metrics](business/11-success-metrics.md) | Measurable KPIs and outcome targets |
 | — | [Data Quality Policy](business/data-quality-policy.md) | Validation pipeline, quality scoring, escalation, and the Data Quality Agent's contract |
+| — | [Risk Register](business/risk-register.md) | Material risks with probability, impact, detection, mitigation, owner, and status |
 
 ### `/docs/architecture` — System Design
 | # | Document | Description |
