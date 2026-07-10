@@ -1,4 +1,4 @@
-# Agent Catalog
+# Agent Catalog 
 
 > **Purpose.** The definitive per-agent specification for the StockSense Decision
 > Intelligence Engine. Each entry defines the agent's responsibility, inputs, outputs,
