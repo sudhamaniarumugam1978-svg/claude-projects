@@ -16,6 +16,7 @@ numbered where it maps to a numbered deliverable, and cross-linked from the
 docs/
 ├── README.md                         # Documentation index / navigation hub
 ├── executive-summary.md              # 17 — Executive summary
+├── glossary.md                       # Shared terminology
 │
 ├── product/                          # Product definition
 │   ├── 01-product-vision.md
@@ -33,10 +34,13 @@ docs/
 │
 ├── business/                         # Business design
 │   ├── 09-business-workflow.md
-│   └── 11-success-metrics.md
+│   ├── 11-success-metrics.md
+│   ├── data-quality-policy.md
+│   └── risk-register.md
 │
 ├── architecture/                     # System design
 │   ├── 13-agent-architecture.md
+│   ├── non-functional-requirements.md  # NFR / SLO specification
 │   └── adr/                          # 16 — Architecture Decision Records
 │       ├── README.md                 # ADR index + template
 │       ├── 0001-decision-intelligence-not-dashboards.md
@@ -44,7 +48,11 @@ docs/
 │       ├── 0003-human-in-the-loop-decisioning.md
 │       ├── 0004-explainable-ai-mandate.md
 │       ├── 0005-multi-agent-orchestration.md
-│       └── 0006-layer-over-systems-of-record.md
+│       ├── 0006-layer-over-systems-of-record.md
+│       ├── 0007-ai-governance-framework.md
+│       ├── 0008-security-architecture.md
+│       ├── 0009-technology-stack.md
+│       └── 0010-multi-agent-architecture-rationale.md
 │
 ├── agents/                           # Agent specifications
 │   └── agent-catalog.md

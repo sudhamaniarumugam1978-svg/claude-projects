@@ -56,12 +56,15 @@ rationale, scope, principles, agent architecture, and roadmap.
 | # | Document | Description |
 | --- | --- | --- |
 | 09 | [Business Workflow](business/09-business-workflow.md) | Supplier → Inventory → Sales → AI → Recommendation → Action |
-| 11 | [Success Metrics](business/11-success-metrics.md) | Measurable KPIs and outcome targets |
+| 11 | [Success Metrics & Metrics Framework](business/11-success-metrics.md) | Full framework: Business, AI, Engineering, Operational, and Adoption KPIs (definition, formula, source, target, frequency, owner, visualization) |
+| — | [Data Quality Policy](business/data-quality-policy.md) | Validation pipeline, quality scoring, escalation, and the Data Quality Agent's contract |
+| — | [Risk Register](business/risk-register.md) | Material risks with probability, impact, detection, mitigation, owner, and status |
 
 ### `/docs/architecture` — System Design
 | # | Document | Description |
 | --- | --- | --- |
 | 13 | [Agent Architecture](architecture/13-agent-architecture.md) | Enterprise multi-agent design, responsibilities, communication, diagrams |
+| — | [Non-Functional Requirements](architecture/non-functional-requirements.md) | Authoritative NFR/SLO spec: availability, performance, security, DR, data integrity, AI quality |
 | — | [ADR Index](architecture/adr/README.md) | Architecture Decision Records for Phase 0 |
 
 ### `/docs/agents` — Agent Specifications
@@ -79,6 +82,7 @@ rationale, scope, principles, agent architecture, and roadmap.
 | # | Document | Description |
 | --- | --- | --- |
 | 17 | [Executive Summary](executive-summary.md) | One-read overview for reviewers, contributors, and investors |
+| — | [Glossary](glossary.md) | Shared vocabulary across retail, inventory, AI/ML, and engineering |
 
 ---
 
