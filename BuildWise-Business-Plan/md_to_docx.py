@@ -12,6 +12,7 @@ Design system
 
 import os
 import re
+import json
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
@@ -48,18 +49,37 @@ sec.different_first_page_header_footer = True  # cover has no header/footer
 # ---------------- Base styles ----------------
 normal = doc.styles["Normal"]
 normal.font.name = BODY_FONT
-normal.font.size = Pt(11.5)
+normal.font.size = Pt(12)
 normal.font.color.rgb = RGBColor.from_string(BLACK)
 pf = normal.paragraph_format
 pf.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-pf.space_after = Pt(6)
-pf.line_spacing = 1.15
+pf.space_after = Pt(8)
+pf.line_spacing = 1.3
 pf.widow_control = True
 # ensure east-asian/cs also map to Times
 rpr = normal.element.get_or_add_rPr().get_or_add_rFonts()
 rpr.set(qn("w:eastAsia"), BODY_FONT)
 
-for lvl, sz in [(1, 18), (2, 14), (3, 12), (4, 11)]:
+# Load chapter start pages (produced by md_to_pdf.py) to fill TOC page numbers.
+CHAP_PAGES = []
+_cp = os.path.join(BASE, "chapter_pages.json")
+if os.path.exists(_cp):
+    try:
+        CHAP_PAGES = json.load(open(_cp))
+    except Exception:
+        CHAP_PAGES = []
+
+FIG = {"n": 0}
+
+
+def fig_caption(caption):
+    FIG["n"] += 1
+    mm = re.match(r"^Figure\s*\d*\s*:\s*(.*)$", caption)
+    desc = mm.group(1) if mm else caption
+    return f"Figure {FIG['n']}: {desc}"
+
+
+for lvl, sz in [(1, 18), (2, 15), (3, 13), (4, 12)]:
     st = doc.styles[f"Heading {lvl}"]
     st.font.name = HEAD_FONT
     st.font.size = Pt(sz)
@@ -72,7 +92,7 @@ for lvl, sz in [(1, 18), (2, 14), (3, 12), (4, 11)]:
     rf.set(qn("w:eastAsia"), HEAD_FONT)
 
 
-def _set_run(run, font=BODY_FONT, size=11.5, bold=False, italic=False, color=BLACK):
+def _set_run(run, font=BODY_FONT, size=12, bold=False, italic=False, color=BLACK):
     run.font.name = font
     run.font.size = Pt(size)
     run.font.bold = bold
@@ -85,7 +105,7 @@ def _set_run(run, font=BODY_FONT, size=11.5, bold=False, italic=False, color=BLA
 INLINE_RE = re.compile(r"(\*\*.+?\*\*|\*[^*]+\*)")
 
 
-def add_runs(paragraph, text, font=BODY_FONT, size=11.5, color=BLACK, base_bold=False):
+def add_runs(paragraph, text, font=BODY_FONT, size=12, color=BLACK, base_bold=False):
     """Add text honouring **bold** and *italic* inline markup."""
     for part in INLINE_RE.split(text):
         if not part:
@@ -162,7 +182,7 @@ def add_table(rows):
             p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             p.paragraph_format.space_after = Pt(2)
             p.paragraph_format.space_before = Pt(2)
-            add_runs(p, txt, font=BODY_FONT, size=10.5, color=BLACK)
+            add_runs(p, txt, font=BODY_FONT, size=11, color=BLACK)
             if ridx % 2 == 1:
                 shade_cell(rowc[i], ROW_ALT)
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
@@ -188,20 +208,67 @@ def add_code_block(codelines):
 
 
 def add_image(path, caption=None):
+    from PIL import Image
+    iw, ih = Image.open(path).size
+    # Wide diagrams get near-full width; tall diagrams are capped by height.
+    max_w_in = 6.4
+    max_h_in = 7.4
+    w_in = max_w_in
+    if (w_in * ih / iw) > max_h_in:
+        w_in = max_h_in * iw / ih
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(6)
+    p.paragraph_format.space_before = Pt(8)
     p.paragraph_format.space_after = Pt(2)
     p.paragraph_format.keep_with_next = True
     run = p.add_run()
-    run.add_picture(path, width=Inches(5.9))
+    run.add_picture(path, width=Inches(w_in))
     if caption:
         cp = doc.add_paragraph()
         cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        cp.paragraph_format.space_after = Pt(10)
-        add_runs(cp, caption, font=BODY_FONT, size=9.5, color=GREY)
+        cp.paragraph_format.space_after = Pt(12)
+        add_runs(cp, fig_caption(caption), font=BODY_FONT, size=11, color=GREY)
         for r in cp.runs:
             r.font.italic = True
+
+
+def build_toc_table(items):
+    """Render the Table of Contents as a bordered S.No / Contents / Page No table."""
+    table = doc.add_table(rows=1, cols=3)
+    table.style = "Table Grid"
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    set_cell_margins(table, top=70, bottom=70, left=130, right=130)
+    headers = ["S. No", "Contents", "Page No"]
+    aligns = [WD_ALIGN_PARAGRAPH.CENTER, WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.CENTER]
+    widths = [Cm(2.2), Cm(11.6), Cm(2.6)]
+    hdr = table.rows[0].cells
+    for i, h in enumerate(headers):
+        hdr[i].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        hdr[i].width = widths[i]
+        p = hdr[i].paragraphs[0]
+        p.alignment = aligns[i]
+        p.paragraph_format.space_after = Pt(3)
+        p.paragraph_format.space_before = Pt(3)
+        add_runs(p, h, font=HEAD_FONT, size=12, color="FFFFFF")
+        for r in p.runs:
+            r.font.bold = True
+        shade_cell(hdr[i], NAVY)
+    for idx, title in enumerate(items, start=1):
+        cells = table.add_row().cells
+        page = ""
+        if idx - 1 < len(CHAP_PAGES) and CHAP_PAGES[idx - 1]:
+            page = str(CHAP_PAGES[idx - 1])
+        vals = [str(idx), title, page]
+        for i in range(3):
+            cells[i].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cells[i].width = widths[i]
+            p = cells[i].paragraphs[0]
+            p.alignment = aligns[i]
+            p.paragraph_format.space_after = Pt(3)
+            p.paragraph_format.space_before = Pt(3)
+            add_runs(p, vals[i], font=BODY_FONT, size=12, color=BLACK)
+            if idx % 2 == 0:
+                shade_cell(cells[i], ROW_ALT)
 
 
 # ==================== COVER PAGE ====================
@@ -398,15 +465,38 @@ while i < len(lines):
     if m:
         level = len(m.group(1))
         text = m.group(2).strip().replace("**", "")
+        if level == 2 and text.upper() == "TABLE OF CONTENTS":
+            # Own page + a proper bordered TOC table.
+            doc.add_page_break()
+            p = doc.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.space_after = Pt(14)
+            p.paragraph_format.space_before = Pt(6)
+            p.paragraph_format.keep_with_next = True
+            add_runs(p, "TABLE OF CONTENTS", font=HEAD_FONT, size=16, color=NAVY)
+            for r in p.runs:
+                r.font.bold = True
+            j = i + 1
+            toc_items = []
+            while j < len(lines):
+                s = lines[j].strip()
+                if s == "" or s == "---":
+                    j += 1
+                    continue
+                mm = re.match(r"^\d+\.\s+(.*)$", s)
+                if mm:
+                    toc_items.append(mm.group(1).strip())
+                    j += 1
+                    continue
+                break
+            build_toc_table(toc_items)
+            i = j
+            continue
         if level == 1:
-            # Flowing chapters: only the first chapter forces a new page; the
-            # rest flow with generous spacing so Word fills each page naturally.
-            if first_chapter:
-                doc.add_page_break()
-                first_chapter = False
+            # Every chapter begins at the top of a new page.
+            doc.add_page_break()
             h = doc.add_heading(level=1)
-            if not first_chapter:
-                h.paragraph_format.space_before = Pt(20)
+            h.paragraph_format.space_before = Pt(2)
             h.paragraph_format.keep_with_next = True
             add_runs(h, text, font=HEAD_FONT, size=18, color=NAVY)
             for r in h.runs:
@@ -422,17 +512,13 @@ while i < len(lines):
             pbdr.append(bottom)
             pPr.append(pbdr)
         elif level == 2 and text.upper() in FRONT_MATTER:
-            # Declaration and Table of Contents open their own page; the short
-            # Acknowledgement flows beneath the Declaration on the same page.
-            if text.upper() == "TABLE OF CONTENTS":
-                doc.add_page_break()
-            elif text.upper() == "ACKNOWLEDGEMENT":
-                spacer = doc.add_paragraph()
-                spacer.paragraph_format.space_after = Pt(10)
-            # DECLARATION starts fresh already (cover ends with a page break)
+            # Declaration opens its own page (cover ended with a break); the
+            # short Acknowledgement flows beneath the Declaration.
+            spacer = doc.add_paragraph()
+            spacer.paragraph_format.space_after = Pt(30 if text.upper() == "ACKNOWLEDGEMENT" else 44)
             p = doc.add_paragraph()
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p.paragraph_format.space_after = Pt(12)
+            p.paragraph_format.space_after = Pt(14)
             p.paragraph_format.space_before = Pt(6)
             p.paragraph_format.keep_with_next = True
             add_runs(p, text.upper(), font=HEAD_FONT, size=16, color=NAVY)
@@ -440,7 +526,7 @@ while i < len(lines):
                 r.font.bold = True
         else:
             h = doc.add_heading(level=min(level, 4))
-            sz = {2: 14, 3: 12, 4: 11}.get(level, 11)
+            sz = {2: 15, 3: 13, 4: 12}.get(level, 12)
             add_runs(h, text, font=HEAD_FONT, size=sz, color=NAVY)
             for r in h.runs:
                 r.font.bold = True

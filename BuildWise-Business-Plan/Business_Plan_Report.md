@@ -108,6 +108,10 @@ Construction is one of the largest sectors of the Indian economy and a major sou
 
 This growth is driven by rapid urbanisation, a rising middle class, increased demand for quality housing, government infrastructure spending, and growing interest in sustainable and smart buildings. The smart home segment in particular has been growing at a high rate, reflecting evolving customer expectations [3]. For a new construction company, this environment offers a large and expanding market, provided the company can differentiate itself through service quality and trust.
 
+![Indian Construction Market](market_overview.png)
+
+*Figure: Size of the Indian construction market and its residential segment in 2025.*
+
 ## 3.2 Market Trends
 
 - **Demand for transparency:** Customers increasingly expect clear pricing, documentation, and regular updates.
@@ -190,6 +194,10 @@ BuildWise is designed from the ground up to solve these specific problems:
 | Quality concerns | Defined quality-assurance checkpoints |
 | No support after handover | Warranty and structured after-sales service |
 
+![Problem to Solution Framework](problem_solution.png)
+
+*Figure: How BuildWise converts common industry problems into concrete, customer-facing solutions.*
+
 ## 4.3 Unique Selling Proposition (USP)
 
 BuildWise's competitive advantage is not low pricing. Its strengths are:
@@ -235,7 +243,9 @@ Each service is delivered with the same underlying commitments: transparent pric
 
 BuildWise follows a disciplined, phased business model. The central principle is that **technology is introduced only after the business can realistically afford it.** The company grows in the following sequence:
 
-> **Start Small → Deliver Excellent Projects → Gain Customer Trust → Generate Revenue → Reinvest Profits → Expand Operations → Introduce Technology → Expand Across India**
+![Business Growth Roadmap](growth_roadmap.png)
+
+*Figure: The BuildWise growth sequence — reputation and revenue are established first, with technology and expansion introduced only once the business can support them.*
 
 ## 6.1 Phase 1 – Business Foundation
 
@@ -291,6 +301,10 @@ With a strong operational and technological base, the company expands its footpr
 
 **Goal:** Establish BuildWise as a technology-enabled national construction brand.
 
+![Phased Business Model](business_model_phases.png)
+
+*Figure: The four-phase BuildWise business model, in which each phase is funded by the success of the phase before it.*
+
 ## 6.5 Revenue Model
 
 BuildWise earns revenue primarily through construction contracts, structured as follows:
@@ -336,19 +350,9 @@ BuildWise positions itself as the **bridge** between these two categories. It of
 
 ## 7.3 SWOT Analysis
 
-| Strengths | Weaknesses |
-|---|---|
-| Transparent, customer-first model | New brand with no track record |
-| Lean, low-overhead structure | Limited initial capital |
-| Strong project-management discipline | Dependent on a small founding team |
-| Clear phased growth strategy | Limited geographic presence at launch |
+![SWOT Analysis](swot_matrix.png)
 
-| Opportunities | Threats |
-|---|---|
-| Large, growing construction market | Input-cost inflation |
-| Demand for transparency and quality | Intense local competition |
-| Rising interest in smart/green homes | Regulatory and approval delays |
-| NRI and investor demand | Skilled-labour shortages |
+*Figure: SWOT analysis of BuildWise Constructions Pvt. Ltd., summarising internal strengths and weaknesses alongside external opportunities and threats.*
 
 ---
 
@@ -388,31 +392,9 @@ Marketing spend is intentionally modest in Year 1 and scales with revenue. Early
 
 BuildWise follows a structured, repeatable project workflow that ensures consistency and transparency across every project:
 
-```
-Lead Generation
-        ↓
-Client Meeting
-        ↓
-Requirement Analysis
-        ↓
-Site Inspection
-        ↓
-Architectural Design
-        ↓
-Quotation
-        ↓
-Agreement
-        ↓
-Material Procurement
-        ↓
-Construction
-        ↓
-Quality Inspection
-        ↓
-Handover
-        ↓
-After-Sales Support
-```
+![Project Workflow](workflow_operations.png)
+
+*Figure: BuildWise's standard twelve-stage project workflow, followed on every project to ensure consistency and transparency.*
 
 ## 9.2 Business Process Flow Description
 
@@ -445,10 +427,9 @@ Customer experience is intended to be one of BuildWise's greatest competitive st
 
 ## 10.1 Customer Journey
 
-```
-Enquiry → Consultation → Transparent Quote → Agreement →
-Regular Updates → Quality Handover → Warranty & Support → Referral
-```
+![Customer Journey](customer_journey.png)
+
+*Figure: The BuildWise customer journey, designed so that customer confidence grows at every stage.*
 
 This journey is designed so that a customer's confidence increases at every step, converting a single project into a lasting relationship and a source of referrals.
 
@@ -475,16 +456,9 @@ As the company grows, specialised departments are introduced — dedicated procu
 
 ## 11.3 Organisation Chart (Startup Stage)
 
-```
-                 Founder / Managing Director
-                            |
-        --------------------------------------------
-        |            |             |               |
-  Civil Engineer  Site Engineer  Finance &     Marketing &
-        |                        Administration  Client Relations
-   Architect
-  (Consultant)
-```
+![Organisation Structure](org_chart.png)
+
+*Figure: BuildWise's lean startup-stage organisation structure, with specialised departments introduced as the company grows.*
 
 ---
 
@@ -514,7 +488,7 @@ BuildWise is founded with a startup capital of **₹1.00 Crore**, contributed by
 
 ![Startup Budget Allocation](budget_allocation.png)
 
-*Figure 1: Allocation of the ₹1.00 Crore startup capital across major categories.*
+*Figure: Allocation of the ₹1.00 Crore startup capital across major categories.*
 
 Company registration itself is inexpensive in India (typically a few thousand to a few tens of thousands of rupees), so the legal allocation also covers professional fees, GST registration, and initial statutory compliance [8].
 
@@ -537,7 +511,7 @@ Company registration itself is inexpensive in India (typically a few thousand to
 
 ![Revenue Growth](revenue_growth.png)
 
-*Figure 2: Projected total revenue and net profit over the first three years (₹ Crore).*
+*Figure: Projected total revenue and net profit over the first three years (₹ Crore).*
 
 ## 12.5 Projected Income Statement
 
@@ -610,6 +584,10 @@ Technology at BuildWise is always a consequence of business growth, never a prec
 
 Each technology investment is justified by the scale and revenue the business has already achieved, ensuring that spending is affordable and returns are realistic.
 
+![Technology Adoption Roadmap](tech_roadmap.png)
+
+*Figure: BuildWise's technology adoption roadmap, introducing capabilities phase by phase as the business grows.*
+
 ---
 
 # CHAPTER 15: GROWTH AND EXPANSION ROADMAP
@@ -642,6 +620,10 @@ Each technology investment is justified by the scale and revenue the business ha
 - Adopt sustainable and green construction practices.
 
 The roadmap reinforces the company's central principle: growth first, technology second, and expansion built on a foundation of trust and profitability.
+
+![Expansion Timeline](expansion_timeline.png)
+
+*Figure: BuildWise's five-year growth and expansion timeline, from first projects to technology-enabled operations across India.*
 
 ---
 
