@@ -384,6 +384,10 @@ BuildWise's marketing is built on demonstrated trust rather than advertising spe
 
 Marketing spend is intentionally modest in Year 1 and scales with revenue. Early rupees are directed at high-return, trust-building channels (site boards, social proof, referrals) before broader digital campaigns are introduced.
 
+![Marketing and Customer Acquisition Funnel](marketing_funnel.png)
+
+*Figure: BuildWise's customer-acquisition funnel, from initial awareness to long-term advocacy.*
+
 ---
 
 # CHAPTER 9: OPERATIONS PLAN
@@ -407,6 +411,10 @@ Quality is managed through defined checkpoints at each major milestone — found
 ## 9.4 Safety Standards
 
 The company enforces basic occupational safety practices at every site, including personal protective equipment, safe scaffolding, and site supervision. Safety compliance protects workers, reduces liability, and reinforces the company's professional image.
+
+![Quality Assurance and Safety](quality_safety.png)
+
+*Figure: BuildWise's stage-wise quality-assurance checkpoints and the safety standards enforced on every site.*
 
 ---
 
@@ -469,6 +477,10 @@ All figures in this chapter are realistic estimates based on typical Indian cons
 ## 12.1 Startup Capital
 
 BuildWise is founded with a startup capital of **₹1.00 Crore**, contributed by the promoter along with support from family and informal investors. The company is intentionally **not** funded by venture capital, consistent with its philosophy of steady, self-sustaining growth.
+
+![Financial Highlights](financial_summary.png)
+
+*Figure: Financial highlights at a glance.*
 
 ## 12.2 Startup Cost Breakdown
 
@@ -552,6 +564,10 @@ Since projected Year 1 revenue is approximately ₹2.02 Crore, the company is ex
 ## 12.9 Budget Summary
 
 The startup capital is sufficient to fund setup, initial operations, and a working-capital float while retaining an emergency reserve. Profits generated from Year 1 onward are reinvested into digital systems (Phase 2) and, subsequently, construction technology (Phase 3), in line with the company's phased growth philosophy.
+
+![Break-Even Analysis](breakeven_chart.png)
+
+*Figure: Break-even analysis — total revenue overtakes total cost at approximately ₹1.50 Crore.*
 
 ---
 
@@ -637,6 +653,10 @@ As the company matures, BuildWise plans to adopt sustainable construction practi
 
 BuildWise intends to contribute to the communities in which it operates through fair wages, safe working conditions for labour, skill-development opportunities for site workers, and participation in local infrastructure improvement initiatives. CSR activities will scale in proportion to the company's growth and profitability.
 
+![Sustainability and ESG Framework](esg_sustainability.png)
+
+*Figure: BuildWise's sustainability and ESG framework across environmental, social, and governance pillars.*
+
 ---
 
 # CHAPTER 17: CONCLUSION
@@ -646,6 +666,10 @@ BuildWise Constructions Pvt. Ltd. is designed as a realistic, disciplined, and c
 The plan addresses genuine, well-documented problems in the Indian construction market and proposes a differentiated position built on transparency, reliability, and long-term relationships rather than the lowest price. The financial projections are conservative and achievable, and the phased growth model minimises risk at every stage.
 
 BuildWise's ultimate ambition is to become one of India's most trusted technology-enabled construction companies. This report demonstrates that such an ambition can be pursued responsibly. True to its founding motto — *"Building Trust, Brick by Brick"* — the company intends to grow one excellent project, one satisfied customer, and one reinvested rupee at a time.
+
+![Key Takeaways](key_takeaways.png)
+
+*Figure: Key takeaways from the BuildWise business plan.*
 
 ---
 

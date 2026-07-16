@@ -177,7 +177,7 @@ def problem_solution():
 
 # ============ 6. EXPANSION TIMELINE ============
 def expansion_timeline():
-    fig, ax = new_ax(12.8, 5.6)
+    fig, ax = new_ax(12.6, 7.0)
     miles = [
         ("Year 1", ["Deliver first projects", "Earn referrals & trust", "Reach break-even"]),
         ("Year 2", ["Strengthen branding", "Grow the workforce", "Launch digital systems"]),
@@ -318,6 +318,125 @@ def tech_roadmap():
     save(fig, "tech_roadmap.png")
 
 
+# ============ 11. MARKETING / CUSTOMER-ACQUISITION FUNNEL ============
+def marketing_funnel():
+    from matplotlib.patches import Polygon
+    fig, ax = new_ax(11.4, 7.4)
+    stages = [
+        ("AWARENESS", "Google Business Profile, Instagram & Facebook, site boards", NAVY),
+        ("INTEREST", "Referrals, word of mouth, customer testimonials", "#20497D"),
+        ("CONSIDERATION", "Consultation & transparent, itemised quotation", NAVY2),
+        ("DECISION", "Signed agreement with milestone-based billing", "#3A6098"),
+        ("ADVOCACY", "Referrals & repeat business", BLUE),
+    ]
+    top_w, bot_w = 94, 46
+    n = len(stages)
+    h = 13.5
+    gap = 2.0
+    y = 92
+    cx = 50
+    for i, (title, desc, color) in enumerate(stages):
+        wt = top_w - (top_w - bot_w) * (i / n)
+        wb = top_w - (top_w - bot_w) * ((i + 1) / n)
+        yt, yb = y, y - h
+        poly = Polygon([(cx - wt / 2, yt), (cx + wt / 2, yt),
+                        (cx + wb / 2, yb), (cx - wb / 2, yb)],
+                       closed=True, facecolor=color, edgecolor="white", lw=2, zorder=3)
+        ax.add_patch(poly)
+        ax.text(cx, (yt + yb) / 2 + 1.6, title, ha="center", va="center",
+                color="white", fontsize=12.5, fontweight="bold", zorder=4)
+        ax.text(cx, (yt + yb) / 2 - 3.4, desc, ha="center", va="center",
+                color="#EAF0F8", fontsize=8.6, zorder=4)
+        y = yb - gap
+    save(fig, "marketing_funnel.png")
+
+
+# ============ 12. QUALITY ASSURANCE & SAFETY ============
+def quality_safety():
+    fig, ax = new_ax(11.6, 6.2)
+    ax.text(50, 96, "Quality Assurance Checkpoints", ha="center", va="center",
+            color=NAVY, fontsize=13, fontweight="bold")
+    stages = ["Foundation\nInspection", "Structure\nInspection",
+              "Finishing\nInspection", "Final Handover\nInspection"]
+    xs = [16, 39.3, 62.6, 86]
+    w, hh = 20, 18
+    for i, (x, s) in enumerate(zip(xs, stages)):
+        box(ax, x, 78, w, hh, s, fc=NAVY if i % 2 == 0 else NAVY2, fs=10, wrap=0)
+        if i < 3:
+            arrow(ax, (x + w / 2, 78), (xs[i + 1] - w / 2, 78))
+    ax.text(50, 50, "Safety Standards on Every Site", ha="center", va="center",
+            color=NAVY, fontsize=13, fontweight="bold")
+    items = ["Personal Protective\nEquipment (PPE)", "Safe Scaffolding\n& Access",
+             "On-site\nSupervision", "Regulatory\nCompliance"]
+    for i, (x, s) in enumerate(zip(xs, items)):
+        box(ax, x, 28, w, 20, s, fc=BLUE if i % 2 == 0 else STEEL, fs=10, wrap=0)
+    save(fig, "quality_safety.png")
+
+
+# ============ 13. ESG / SUSTAINABILITY PILLARS ============
+def esg_sustainability():
+    fig, ax = new_ax(11.6, 7.0)
+    pillars = [
+        ("ENVIRONMENTAL", NAVY, ["Energy-efficient design",
+                                 "Responsible material sourcing",
+                                 "On-site waste reduction",
+                                 "Green-building certifications"]),
+        ("SOCIAL", NAVY2, ["Fair wages & safe conditions",
+                           "Skill development for workers",
+                           "Community infrastructure support",
+                           "Customer trust & transparency"]),
+        ("GOVERNANCE", BLUE, ["Transparent documentation",
+                              "Regulatory & RERA compliance",
+                              "Quality & safety standards",
+                              "Ethical business conduct"]),
+    ]
+    cw = 30
+    xs = [8, 38, 68]
+    ax.text(50, 95, "Sustainability & ESG Framework", ha="center", va="center",
+            color=NAVY, fontsize=14, fontweight="bold")
+    for (title, color, items), x in zip(pillars, xs):
+        ax.add_patch(FancyBboxPatch((x, 6), cw, 78,
+                     boxstyle="round,pad=0.02,rounding_size=2", facecolor="white",
+                     edgecolor=color, linewidth=2.2, zorder=2))
+        ax.add_patch(FancyBboxPatch((x, 74), cw, 10, boxstyle="square,pad=0",
+                     facecolor=color, edgecolor=color, zorder=3))
+        ax.text(x + cw / 2, 79, title, ha="center", va="center", color="white",
+                fontsize=11.5, fontweight="bold", zorder=4)
+        for k, it in enumerate(items):
+            ax.text(x + cw / 2, 64 - k * 15,
+                    "\n".join(textwrap.wrap(it, 20)), ha="center", va="center",
+                    color="#2B2B2B", fontsize=9.6, zorder=4)
+    save(fig, "esg_sustainability.png")
+
+
+# ============ 14. CONCLUSION KEY TAKEAWAYS + MOTTO CALLOUT ============
+def key_takeaways():
+    fig, ax = new_ax(11.6, 6.8)
+    ax.text(50, 93, "Key Takeaways", ha="center", va="center",
+            color=NAVY, fontsize=15, fontweight="bold")
+    cards = [
+        ("Trust-Led Differentiation", "Transparency, quality and communication\u2014not the lowest price"),
+        ("Disciplined Phased Growth", "Revenue and reputation first; technology only when affordable"),
+        ("Realistic Financials", "Conservative projections with break-even inside Year 1"),
+        ("Clear Expansion Path", "From Chennai to a technology-enabled national brand"),
+    ]
+    pos = [(6, 56), (52, 56), (6, 27), (52, 27)]
+    cw, ch = 42, 24
+    for (title, desc), (x, y) in zip(cards, pos):
+        ax.add_patch(FancyBboxPatch((x, y), cw, ch, boxstyle="round,pad=0.02,rounding_size=2",
+                     facecolor=NAVY, edgecolor=NAVY, zorder=2))
+        ax.text(x + cw / 2, y + ch - 6, title, ha="center", va="center", color="white",
+                fontsize=11, fontweight="bold", zorder=3)
+        ax.text(x + cw / 2, y + ch / 2 - 4, "\n".join(textwrap.wrap(desc, 34)),
+                ha="center", va="center", color="#D9E2F0", fontsize=8.8, zorder=3)
+    # closing motto banner
+    ax.add_patch(FancyBboxPatch((6, 4), 88, 13, boxstyle="round,pad=0.02,rounding_size=2",
+                 facecolor="#0F2A50", edgecolor="#0F2A50", zorder=2))
+    ax.text(50, 10.5, '"Building Trust, Brick by Brick."', ha="center", va="center",
+            color="white", fontsize=16, fontweight="bold", style="italic", zorder=3)
+    save(fig, "key_takeaways.png")
+
+
 if __name__ == "__main__":
     workflow()
     org_chart()
@@ -329,4 +448,8 @@ if __name__ == "__main__":
     market_overview()
     swot_matrix()
     tech_roadmap()
+    marketing_funnel()
+    quality_safety()
+    esg_sustainability()
+    key_takeaways()
     print("all diagrams done")

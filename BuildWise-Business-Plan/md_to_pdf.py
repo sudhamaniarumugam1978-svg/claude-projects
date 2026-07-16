@@ -237,7 +237,7 @@ def render_code(codelines):
     pdf.set_text_color(*BLACK)
 
 
-def render_image(path, caption=None):
+def render_image(path, caption=None, chapter_end=False):
     from PIL import Image
     iw, ih = Image.open(path).size
     max_w, max_h = EPW, 185.0
@@ -257,6 +257,11 @@ def render_image(path, caption=None):
     block = 3 + disp_h + 2 + cap_h
     if pdf.get_y() + block > pdf.page_break_trigger:
         pdf.add_page()
+        # A chapter-ending figure that lands on its own page is centred
+        # vertically so the page looks balanced rather than top-heavy.
+        if chapter_end:
+            avail = pdf.page_break_trigger - pdf.get_y()
+            pdf.ln(max(0, (avail - block) / 2 - 5))
     x = pdf.l_margin + (EPW - disp_w) / 2
     pdf.ln(3)
     pdf.image(path, x=x, w=disp_w)
@@ -387,8 +392,13 @@ def build(toc_pages):
             if j < len(lines) and re.match(r"^\*Figure.*\*$", lines[j].strip()):
                 caption = lines[j].strip().strip("*")
                 i = j
+            # Is this figure the last element of its chapter?
+            k = i + 1
+            while k < len(lines) and (lines[k].strip() == "" or lines[k].strip() == "---"):
+                k += 1
+            chapter_end = (k >= len(lines)) or lines[k].strip().startswith("# ")
             if os.path.exists(img_path):
-                render_image(img_path, caption)
+                render_image(img_path, caption, chapter_end=chapter_end)
             i += 1
             continue
 
@@ -461,10 +471,10 @@ def build(toc_pages):
                 pdf.set_text_color(*BLACK)
             elif level == 2 and text.upper() in FRONT_MATTER:
                 if text.upper() == "ACKNOWLEDGEMENT":
-                    pdf.ln(26)
+                    pdf.ln(34)
                 else:
                     pdf.add_page()
-                    pdf.ln(32)
+                    pdf.ln(52)
                 pdf.set_font("Head", "B", 16)
                 pdf.set_text_color(*NAVY)
                 pdf.set_x(pdf.l_margin)
