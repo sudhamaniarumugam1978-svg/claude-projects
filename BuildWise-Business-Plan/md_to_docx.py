@@ -271,6 +271,65 @@ def build_toc_table(items):
                 shade_cell(cells[i], ROW_ALT)
 
 
+def set_cell_left_border(cell, color, sz=30):
+    tcPr = cell._tc.get_or_add_tcPr()
+    borders = OxmlElement("w:tcBorders")
+    left = OxmlElement("w:left")
+    left.set(qn("w:val"), "single")
+    left.set(qn("w:sz"), str(sz))
+    left.set(qn("w:space"), "0")
+    left.set(qn("w:color"), color)
+    borders.append(left)
+    tcPr.append(borders)
+
+
+def add_callout(title, body):
+    """A shaded highlight box with a navy left accent border."""
+    table = doc.add_table(rows=1, cols=1)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    set_cell_margins(table, top=110, bottom=110, left=180, right=150)
+    cell = table.rows[0].cells[0]
+    shade_cell(cell, ROW_ALT)
+    set_cell_left_border(cell, NAVY, sz=30)
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(2)
+    if title:
+        add_runs(p, title, font=HEAD_FONT, size=12, color=NAVY)
+        for r in p.runs:
+            r.font.bold = True
+        pb = cell.add_paragraph()
+        pb.paragraph_format.space_after = Pt(0)
+        add_runs(pb, body, font=BODY_FONT, size=11.5, color=BLACK)
+    else:
+        add_runs(p, body, font=BODY_FONT, size=11.5, color=BLACK)
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+
+def add_cards(cards):
+    """A row of navy KPI / statistic cards."""
+    n = len(cards)
+    table = doc.add_table(rows=1, cols=n)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    set_cell_margins(table, top=120, bottom=120, left=70, right=70)
+    for k, (val, lab) in enumerate(cards):
+        cell = table.rows[0].cells[k]
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        cell.width = Cm(4.0)
+        shade_cell(cell, NAVY)
+        set_cell_left_border(cell, "FFFFFF", sz=12)
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_after = Pt(2)
+        add_runs(p, val, font=HEAD_FONT, size=18, color="FFFFFF")
+        for r in p.runs:
+            r.font.bold = True
+        p2 = cell.add_paragraph()
+        p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p2.paragraph_format.space_after = Pt(0)
+        add_runs(p2, lab, font=BODY_FONT, size=9.5, color="D6E0EE")
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+
 # ==================== COVER PAGE ====================
 def centered(text, font, size, bold=False, italic=False, color=NAVY,
              space_before=0, space_after=6):
@@ -433,6 +492,34 @@ while i < len(lines):
             i = j
         if os.path.exists(img_path):
             add_image(img_path, caption)
+        i += 1
+        continue
+
+    # callout / highlight box
+    if stripped.startswith(":::callout"):
+        title = stripped[len(":::callout"):].strip()
+        body_lines = []
+        i += 1
+        while i < len(lines) and lines[i].strip() != ":::":
+            if lines[i].strip():
+                body_lines.append(lines[i].strip())
+            i += 1
+        add_callout(title, " ".join(body_lines))
+        i += 1
+        continue
+
+    # KPI cards
+    if stripped.startswith(":::cards"):
+        cards = []
+        i += 1
+        while i < len(lines) and lines[i].strip() != ":::":
+            s = lines[i].strip()
+            if "::" in s:
+                v, l = s.split("::", 1)
+                cards.append((v.strip(), l.strip()))
+            i += 1
+        if cards:
+            add_cards(cards)
         i += 1
         continue
 

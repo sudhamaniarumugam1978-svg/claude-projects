@@ -277,6 +277,70 @@ def render_image(path, caption=None, chapter_end=False):
     pdf.set_text_color(*BLACK)
 
 
+def render_callout(title, body):
+    """A shaded highlight box with a navy left accent bar."""
+    pad = 4.0
+    bar = 3.0
+    inner_w = EPW - bar - 2 * pad
+    tlines = wrapped_lines(title, inner_w, "Head", "B", 12) if title else 0
+    blines = wrapped_lines(_md_to_plain_marked(body), inner_w, "Body", "", 11.5, markdown=True)
+    th = tlines * 6.4
+    bh = blines * 6.0
+    h = pad + th + (2 if title else 0) + bh + pad
+    if pdf.get_y() + h + 6 > pdf.page_break_trigger:
+        pdf.add_page()
+    pdf.ln(2)
+    y0 = pdf.get_y()
+    pdf.set_fill_color(*ROW_ALT)
+    pdf.rect(pdf.l_margin, y0, EPW, h, style="F")
+    pdf.set_fill_color(*NAVY)
+    pdf.rect(pdf.l_margin, y0, bar, h, style="F")
+    tx = pdf.l_margin + bar + pad
+    cy = y0 + pad
+    if title:
+        pdf.set_xy(tx, cy)
+        pdf.set_font("Head", "B", 12)
+        pdf.set_text_color(*NAVY)
+        pdf.multi_cell(inner_w, 6.4, title, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        cy = pdf.get_y() + 2
+    pdf.set_xy(tx, cy)
+    pdf.set_font("Body", "", 11.5)
+    pdf.set_text_color(*BLACK)
+    pdf.multi_cell(inner_w, 6.0, _md_to_plain_marked(body), markdown=True,
+                   new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    pdf.set_y(y0 + h)
+    pdf.ln(4)
+    pdf.set_text_color(*BLACK)
+
+
+def render_cards(cards):
+    """A row of navy KPI / statistic cards (big value + small label)."""
+    n = len(cards)
+    gap = 3.5
+    cw = (EPW - gap * (n - 1)) / n
+    ch = 22.0
+    if pdf.get_y() + ch + 8 > pdf.page_break_trigger:
+        pdf.add_page()
+    pdf.ln(2)
+    y0 = pdf.get_y()
+    x = pdf.l_margin
+    for val, lab in cards:
+        pdf.set_fill_color(*NAVY)
+        pdf.rect(x, y0, cw, ch, style="F")
+        pdf.set_xy(x, y0 + 4.5)
+        pdf.set_font("Head", "B", 16)
+        pdf.set_text_color(*WHITE)
+        pdf.multi_cell(cw, 8, val, align="C", new_x=XPos.RIGHT, new_y=YPos.TOP)
+        pdf.set_xy(x, y0 + ch - 7.5)
+        pdf.set_font("Body", "", 9.5)
+        pdf.set_text_color(212, 222, 238)
+        pdf.multi_cell(cw, 4.5, lab, align="C", new_x=XPos.RIGHT, new_y=YPos.TOP)
+        x += cw + gap
+    pdf.set_y(y0 + ch)
+    pdf.ln(5)
+    pdf.set_text_color(*BLACK)
+
+
 # ==================== COVER ====================
 def cover_center(text, font, style, size, color, sa=6, sb=0):
     if sb:
@@ -399,6 +463,32 @@ def build(toc_pages):
             chapter_end = (k >= len(lines)) or lines[k].strip().startswith("# ")
             if os.path.exists(img_path):
                 render_image(img_path, caption, chapter_end=chapter_end)
+            i += 1
+            continue
+
+        if stripped.startswith(":::callout"):
+            title = stripped[len(":::callout"):].strip()
+            body_lines = []
+            i += 1
+            while i < len(lines) and lines[i].strip() != ":::":
+                if lines[i].strip():
+                    body_lines.append(lines[i].strip())
+                i += 1
+            render_callout(title, " ".join(body_lines))
+            i += 1
+            continue
+
+        if stripped.startswith(":::cards"):
+            cards = []
+            i += 1
+            while i < len(lines) and lines[i].strip() != ":::":
+                s = lines[i].strip()
+                if "::" in s:
+                    v, l = s.split("::", 1)
+                    cards.append((v.strip(), l.strip()))
+                i += 1
+            if cards:
+                render_cards(cards)
             i += 1
             continue
 

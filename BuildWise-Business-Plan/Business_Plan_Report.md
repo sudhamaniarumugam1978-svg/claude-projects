@@ -35,15 +35,34 @@ We express our sincere gratitude to our faculty guide and the Department for the
 
 # CHAPTER 1: EXECUTIVE SUMMARY
 
-BuildWise Constructions Pvt. Ltd. is a technology-enabled construction startup based in Chennai, Tamil Nadu, established in 2026. The company provides residential construction, commercial construction, renovation, interior works, and turnkey project services to individual homeowners, small business owners, and property investors. BuildWise begins as a focused, service-led construction firm and follows a phased growth strategy that introduces digital systems and construction technology only after the business achieves stable revenue and customer trust.
+**Business Name:** BuildWise Constructions Pvt. Ltd.
 
-The Indian construction sector is among the largest contributors to the national economy and continues to expand steadily on the back of urbanisation, housing demand, and infrastructure investment. Despite this growth, customers frequently encounter unclear pricing, unreliable execution, weak documentation, delayed handovers, and poor communication. BuildWise is built specifically to address these gaps. The company does not compete on the lowest price; it competes on transparency, reliability, professional project management, and long-term customer relationships.
+**Industry:** Technology-enabled construction startup based in Chennai, Tamil Nadu, established in 2026.
 
-The business is founded with a startup capital of ₹1.00 Crore, funded through the promoter's own contribution and support from family and informal investors rather than venture capital. This capital is allocated across office setup, legal registration, engineering software, equipment, marketing, working capital, salaries, and an emergency reserve. The company is expected to reach operational break-even within the first year and to grow revenue from approximately ₹2.0 Crore in Year 1 to ₹8.75 Crore in Year 3, while maintaining conservative and realistic profit margins.
+**Mission:** To provide transparent, reliable, high-quality, and customer-centric construction services while gradually transforming into one of India's most trusted technology-enabled construction companies.
 
-BuildWise follows a four-phase growth model: **Phase 1 – Business Foundation**, focused purely on delivering excellent projects; **Phase 2 – Digital Foundation**, introducing a website, customer portal, and digital documentation; **Phase 3 – Technology Integration**, adding material tracking, inventory systems, and AI-assisted estimation; and **Phase 4 – Expansion**, scaling across multiple Indian cities with commercial projects, premium housing, and smart construction solutions. Technology is treated as an outcome of business growth, never as a precondition for it.
+**Problem:** Customers frequently encounter unclear pricing, unreliable execution, weak documentation, delayed handovers, and poor communication.
 
-This report presents a complete and realistic roadmap for building BuildWise from a small, trusted local construction firm into one of India's most reliable technology-enabled construction companies.
+**Solution:** BuildWise addresses these gaps by competing on transparency, reliability, professional project management, and long-term customer relationships — not on the lowest price.
+
+**Target Customers:** Individual homeowners, small business owners, and property investors.
+
+**Key Services:** Residential construction, commercial construction, renovation, interior works, and turnkey projects.
+
+**Competitive Advantages:** Transparency, reliability, professional project management, and long-term customer relationships, delivered through a phased, self-funded growth model.
+
+**Growth Model:** Four phases — Business Foundation, Digital Foundation, Technology Integration, and Expansion. Technology is treated as an outcome of business growth, never as a precondition for it.
+
+**Financial Highlights:**
+
+:::cards
+₹1.00 Cr :: Startup Capital
+Year 1 :: Break-even
+₹2.02 Cr :: Year 1 Revenue
+₹8.76 Cr :: Year 3 Revenue
+:::
+
+**Future Vision:** To build BuildWise from a small, trusted local construction firm into one of India's most reliable technology-enabled construction companies.
 
 ---
 
@@ -96,7 +115,11 @@ To become one of India's most trusted construction companies by combining engine
 
 ## 2.7 Company Philosophy
 
-BuildWise is guided by a simple, enduring motto: *"Building Trust, Brick by Brick."* The company believes that trust in construction is not won through advertising or promises, but earned gradually — through transparent pricing, honest communication, disciplined execution, and consistent quality on every project. This philosophy shapes how the company grows: reputation first, revenue next, and technology only when it genuinely strengthens the customer experience. Each completed project is treated as one more block in a long-term relationship with the customer and the wider community.
+:::callout Company Motto
+"Building Trust, Brick by Brick."
+:::
+
+BuildWise believes that trust in construction is not won through advertising or promises, but earned gradually — through transparent pricing, honest communication, disciplined execution, and consistent quality on every project. This philosophy shapes how the company grows: reputation first, revenue next, and technology only when it genuinely strengthens the customer experience. Each completed project is treated as one more block in a long-term relationship with the customer and the wider community.
 
 ---
 
@@ -114,11 +137,13 @@ This growth is driven by rapid urbanisation, a rising middle class, increased de
 
 ## 3.2 Market Trends
 
-- **Demand for transparency:** Customers increasingly expect clear pricing, documentation, and regular updates.
-- **Rising input costs:** Construction costs are projected to rise by around 3–5% in 2026, driven largely by labour cost inflation, making accurate estimation and disciplined project management essential [5].
-- **Quality awareness:** Independent analyses note that only a small share of Indian construction projects undergo third-party quality audits, highlighting both a gap and an opportunity for firms that prioritise quality assurance [6].
-- **Digital adoption:** Buyers are more comfortable with digital documentation, online updates, and customer portals than ever before.
-- **Sustainability:** Green materials, energy efficiency, and smart-home features are gradually shifting from premium add-ons to mainstream expectations.
+| Trend | What It Means for BuildWise |
+|---|---|
+| Demand for transparency | Customers increasingly expect clear pricing, documentation, and regular updates. |
+| Rising input costs | Construction costs are projected to rise by around 3–5% in 2026, driven largely by labour cost inflation, making accurate estimation and disciplined project management essential [5]. |
+| Quality awareness | Only a small share of Indian construction projects undergo third-party quality audits, highlighting both a gap and an opportunity for firms that prioritise quality assurance [6]. |
+| Digital adoption | Buyers are more comfortable with digital documentation, online updates, and customer portals than ever before. |
+| Sustainability | Green materials, energy efficiency, and smart-home features are gradually shifting from premium add-ons to mainstream expectations. |
 
 ## 3.3 Target Market
 
@@ -220,11 +245,13 @@ BuildWise's competitive advantage is not low pricing. Its strengths are:
 
 BuildWise offers an integrated portfolio of construction services, allowing customers to work with a single trusted partner across the project lifecycle.
 
-- **Residential Construction:** Independent houses, villas, and small apartment units built to customer requirements.
-- **Commercial Construction:** Offices, retail spaces, and small commercial buildings.
-- **Renovation:** Structural and cosmetic renovation of existing residential and commercial properties.
-- **Interior Works:** Interior design and execution, including modular kitchens, wardrobes, false ceilings, flooring, and finishing.
-- **Turnkey Projects:** End-to-end delivery from design and approvals to final handover, ideal for busy customers and NRIs.
+| Service | Description |
+|---|---|
+| Residential Construction | Independent houses, villas, and small apartment units built to customer requirements. |
+| Commercial Construction | Offices, retail spaces, and small commercial buildings. |
+| Renovation | Structural and cosmetic renovation of existing residential and commercial properties. |
+| Interior Works | Interior design and execution, including modular kitchens, wardrobes, false ceilings, flooring, and finishing. |
+| Turnkey Projects | End-to-end delivery from design and approvals to final handover, ideal for busy customers and NRIs. |
 
 ## 5.2 Future Services (Introduced in Later Phases)
 
@@ -241,7 +268,11 @@ Each service is delivered with the same underlying commitments: transparent pric
 
 # CHAPTER 6: BUSINESS MODEL
 
-BuildWise follows a disciplined, phased business model. The central principle is that **technology is introduced only after the business can realistically afford it.** The company grows in the following sequence:
+BuildWise follows a disciplined, phased business model in which the company grows in a deliberate sequence, summarised below.
+
+:::callout Key Principle
+Technology is introduced only after the business can realistically afford it.
+:::
 
 ![Business Growth Roadmap](growth_roadmap.png)
 
