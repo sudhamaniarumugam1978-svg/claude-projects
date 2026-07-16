@@ -264,6 +264,11 @@ BuildWise offers an integrated portfolio of construction services, allowing cust
 
 Each service is delivered with the same underlying commitments: transparent pricing, milestone billing, quality checkpoints, structured documentation, and after-sales support. This consistency is what converts first-time customers into long-term references.
 
+:::insights Business Insight
+Covering the full project lifecycle lets customers work with a single trusted partner.
+Consistent commitments across every service turn first-time clients into long-term references.
+:::
+
 ---
 
 # CHAPTER 6: BUSINESS MODEL
@@ -385,6 +390,11 @@ BuildWise positions itself as the **bridge** between these two categories. It of
 
 *Figure: SWOT analysis of BuildWise Constructions Pvt. Ltd., summarising internal strengths and weaknesses alongside external opportunities and threats.*
 
+:::insights Strategic Insight
+BuildWise converts transparency and service quality into a genuine competitive edge.
+Its main threats — cost inflation and local competition — are managed through disciplined estimation and phased growth.
+:::
+
 ---
 
 # CHAPTER 8: MARKETING STRATEGY
@@ -419,6 +429,11 @@ Marketing spend is intentionally modest in Year 1 and scales with revenue. Early
 
 *Figure: BuildWise's customer-acquisition funnel, from initial awareness to long-term advocacy.*
 
+:::insights Key Insights
+Early demand is driven by referrals and completed-project reputation rather than advertising spend.
+Paid and digital channels are scaled only once revenue can support them.
+:::
+
 ---
 
 # CHAPTER 9: OPERATIONS PLAN
@@ -446,6 +461,11 @@ The company enforces basic occupational safety practices at every site, includin
 ![Quality Assurance and Safety](quality_safety.png)
 
 *Figure: BuildWise's stage-wise quality-assurance checkpoints and the safety standards enforced on every site.*
+
+:::insights Key Insights
+A single, repeatable workflow keeps every project consistent and transparent.
+Stage-wise quality checkpoints and on-site safety protect customers and workers alike.
+:::
 
 ---
 
@@ -499,6 +519,11 @@ As the company grows, specialised departments are introduced — dedicated procu
 
 *Figure: BuildWise's lean startup-stage organisation structure, with specialised departments introduced as the company grows.*
 
+:::insights Key Insights
+A lean, multi-role team keeps overhead low during the startup stage.
+Specialised departments are added only as revenue and project volume grow.
+:::
+
 ---
 
 # CHAPTER 12: FINANCIAL PLAN
@@ -543,6 +568,13 @@ Company registration itself is inexpensive in India (typically a few thousand to
 - A corporate tax rate of approximately 25% is applied to profits.
 - Revenue grows steadily as the company completes projects, earns referrals, and expands capacity.
 - Construction input costs are assumed to rise by 3–5% annually and are built into quotations [5].
+
+:::cards
+~80% :: Direct Project Costs
+~20% :: Contribution Margin
+₹1.50 Cr :: Break-even Revenue
+~7.5% :: Year 3 Net Margin
+:::
 
 ## 12.4 Revenue Projections
 
@@ -600,6 +632,11 @@ The startup capital is sufficient to fund setup, initial operations, and a worki
 
 *Figure: Break-even analysis — total revenue overtakes total cost at approximately ₹1.50 Crore.*
 
+:::insights Key Insights
+Break-even is reached within Year 1 at roughly ₹1.50 Crore of revenue.
+Milestone billing and a contingency reserve safeguard cash flow while the company scales.
+:::
+
 ---
 
 # CHAPTER 13: RISK ASSESSMENT
@@ -634,6 +671,11 @@ Each technology investment is justified by the scale and revenue the business ha
 ![Technology Adoption Roadmap](tech_roadmap.png)
 
 *Figure: BuildWise's technology adoption roadmap, introducing capabilities phase by phase as the business grows.*
+
+:::insights Key Insights
+Technology is adopted phase by phase, funded by proven business growth.
+Each tool is introduced only to strengthen an operation that already works.
+:::
 
 ---
 
@@ -672,6 +714,11 @@ The roadmap reinforces the company's central principle: growth first, technology
 
 *Figure: BuildWise's five-year growth and expansion timeline, from first projects to technology-enabled operations across India.*
 
+:::insights Key Insights
+Expansion follows a trust-first sequence: deliver, earn referrals, then scale.
+Multi-city, commercial, and premium segments come only after local success is proven.
+:::
+
 ---
 
 # CHAPTER 16: SUSTAINABILITY AND CSR STRATEGY
@@ -688,6 +735,11 @@ BuildWise intends to contribute to the communities in which it operates through 
 
 *Figure: BuildWise's sustainability and ESG framework across environmental, social, and governance pillars.*
 
+:::insights Key Insights
+Sustainability spans environmental, social, and governance responsibilities together.
+ESG and CSR commitments scale in proportion to the company's growth and profitability.
+:::
+
 ---
 
 # CHAPTER 17: CONCLUSION
@@ -697,6 +749,10 @@ BuildWise Constructions Pvt. Ltd. is designed as a realistic, disciplined, and c
 The plan addresses genuine, well-documented problems in the Indian construction market and proposes a differentiated position built on transparency, reliability, and long-term relationships rather than the lowest price. The financial projections are conservative and achievable, and the phased growth model minimises risk at every stage.
 
 BuildWise's ultimate ambition is to become one of India's most trusted technology-enabled construction companies. This report demonstrates that such an ambition can be pursued responsibly. True to its founding motto — *"Building Trust, Brick by Brick"* — the company intends to grow one excellent project, one satisfied customer, and one reinvested rupee at a time.
+
+:::callout Final Takeaway
+BuildWise pursues an ambitious vision responsibly — earning trust, revenue, and capability one project at a time, and adopting technology only when it strengthens the customer experience.
+:::
 
 ![Key Takeaways](key_takeaways.png)
 

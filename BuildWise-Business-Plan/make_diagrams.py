@@ -90,19 +90,19 @@ def workflow():
 
 # ============ 2. ORGANISATION CHART ============
 def org_chart():
-    fig, ax = new_ax(11.5, 7.2)
-    box(ax, 50, 88, 40, 15, "Founder / Managing Director", fc=NAVY, fs=13, wrap=22)
-    lvl2 = [("Civil Engineer", 15), ("Site Engineer", 38.3),
-            ("Finance & Administration", 61.6), ("Marketing & Client Relations", 85)]
+    fig, ax = new_ax(12.6, 7.4)
+    box(ax, 50, 89, 48, 16, "Founder / Managing Director", fc=NAVY, fs=15, wrap=24)
+    lvl2 = [("Civil Engineer", 13), ("Site Engineer", 37.7),
+            ("Finance & Administration", 62.3), ("Marketing & Client Relations", 87)]
     busy = 60
-    arrow(ax, (50, 80.5), (50, busy + 6), style="-")
-    ax.plot([lvl2[0][1], lvl2[-1][1]], [busy + 6, busy + 6], color=LINE, lw=2, zorder=2)
+    arrow(ax, (50, 81), (50, busy + 6), style="-")
+    ax.plot([lvl2[0][1], lvl2[-1][1]], [busy + 6, busy + 6], color=LINE, lw=2.4, zorder=2)
     for name, x in lvl2:
-        ax.plot([x, x], [busy + 6, 52 + 7.5], color=LINE, lw=2, zorder=2)
-        box(ax, x, 52, 21, 15, name, fc=NAVY2, fs=11, wrap=14)
+        ax.plot([x, x], [busy + 6, 52 + 8.5], color=LINE, lw=2.4, zorder=2)
+        box(ax, x, 51.5, 23, 17, name, fc=NAVY2, fs=12.5, wrap=14)
     # third level under Civil Engineer
-    arrow(ax, (lvl2[0][1], 44.5), (lvl2[0][1], 30 + 7), style="-")
-    box(ax, lvl2[0][1], 24, 21, 14, "Architect (Consultant)", fc=BLUE, fs=10.5, wrap=14)
+    arrow(ax, (lvl2[0][1], 43), (lvl2[0][1], 31), style="-")
+    box(ax, lvl2[0][1], 23.5, 23, 15, "Architect (Consultant)", fc=BLUE, fs=12, wrap=14)
     save(fig, "org_chart.png")
 
 

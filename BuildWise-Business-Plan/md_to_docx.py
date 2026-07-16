@@ -76,7 +76,7 @@ def fig_caption(caption):
     FIG["n"] += 1
     mm = re.match(r"^Figure\s*\d*\s*:\s*(.*)$", caption)
     desc = mm.group(1) if mm else caption
-    return f"Figure {FIG['n']}: {desc}"
+    return f"Figure {FIG['n']}. {desc}"
 
 
 for lvl, sz in [(1, 18), (2, 15), (3, 13), (4, 12)]:
@@ -207,12 +207,12 @@ def add_code_block(codelines):
             run.add_break()
 
 
-def add_image(path, caption=None):
+def add_image(path, caption=None, followed_by_box=False):
     from PIL import Image
     iw, ih = Image.open(path).size
     # Wide diagrams get near-full width; tall diagrams are capped by height.
     max_w_in = 6.4
-    max_h_in = 7.4
+    max_h_in = 4.6 if followed_by_box else 7.4
     w_in = max_w_in
     if (w_in * ih / iw) > max_h_in:
         w_in = max_h_in * iw / ih
@@ -327,6 +327,27 @@ def add_cards(cards):
         p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
         p2.paragraph_format.space_after = Pt(0)
         add_runs(p2, lab, font=BODY_FONT, size=9.5, color="D6E0EE")
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+
+def add_insights(title, items):
+    """A shaded box with a navy left accent bar and a short bulleted list."""
+    table = doc.add_table(rows=1, cols=1)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    set_cell_margins(table, top=110, bottom=110, left=180, right=150)
+    cell = table.rows[0].cells[0]
+    shade_cell(cell, ROW_ALT)
+    set_cell_left_border(cell, NAVY, sz=30)
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(3)
+    add_runs(p, title, font=HEAD_FONT, size=12, color=NAVY)
+    for r in p.runs:
+        r.font.bold = True
+    for it in items:
+        pi = cell.add_paragraph()
+        pi.paragraph_format.space_after = Pt(2)
+        pi.paragraph_format.left_indent = Cm(0.3)
+        add_runs(pi, "\u2022  " + it, font=BODY_FONT, size=11, color=BLACK)
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
 
@@ -490,8 +511,12 @@ while i < len(lines):
         if j < len(lines) and re.match(r"^\*Figure.*\*$", lines[j].strip()):
             caption = lines[j].strip().strip("*")
             i = j
+        k = i + 1
+        while k < len(lines) and (lines[k].strip() == "" or lines[k].strip() == "---"):
+            k += 1
+        followed_by_box = k < len(lines) and lines[k].strip().startswith(":::")
         if os.path.exists(img_path):
-            add_image(img_path, caption)
+            add_image(img_path, caption, followed_by_box=followed_by_box)
         i += 1
         continue
 
@@ -520,6 +545,21 @@ while i < len(lines):
             i += 1
         if cards:
             add_cards(cards)
+        i += 1
+        continue
+
+    # Key Insights box
+    if stripped.startswith(":::insights"):
+        title = stripped[len(":::insights"):].strip() or "Key Insights"
+        items = []
+        i += 1
+        while i < len(lines) and lines[i].strip() != ":::":
+            s = lines[i].strip()
+            if s:
+                items.append(re.sub(r"^[-*\u2022]\s*", "", s))
+            i += 1
+        if items:
+            add_insights(title, items)
         i += 1
         continue
 

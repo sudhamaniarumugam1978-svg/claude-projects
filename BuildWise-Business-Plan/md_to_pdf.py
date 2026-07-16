@@ -237,10 +237,13 @@ def render_code(codelines):
     pdf.set_text_color(*BLACK)
 
 
-def render_image(path, caption=None, chapter_end=False):
+def render_image(path, caption=None, chapter_end=False, followed_by_box=False):
     from PIL import Image
     iw, ih = Image.open(path).size
-    max_w, max_h = EPW, 185.0
+    max_w = EPW
+    # If a highlight/insights/cards box follows the figure, cap the figure height
+    # so the figure and the box comfortably share one page (no orphaned box).
+    max_h = 116.0 if followed_by_box else 185.0
     disp_w = max_w
     disp_h = disp_w * ih / iw
     if disp_h > max_h:
@@ -255,13 +258,20 @@ def render_image(path, caption=None, chapter_end=False):
         nlines = wrapped_lines(f"Figure 0: {cap_desc}", EPW, "Body", "I", 11)
         cap_h = nlines * 5.4 + 3
     block = 3 + disp_h + 2 + cap_h
-    if pdf.get_y() + block > pdf.page_break_trigger:
+    # Reserve room for a following box so the figure and its box stay together.
+    reserve = 46 if followed_by_box else 0
+    if pdf.get_y() + block + reserve > pdf.page_break_trigger:
         pdf.add_page()
         # A chapter-ending figure that lands on its own page is centred
         # vertically so the page looks balanced rather than top-heavy.
         if chapter_end:
             avail = pdf.page_break_trigger - pdf.get_y()
             pdf.ln(max(0, (avail - block) / 2 - 5))
+        elif followed_by_box:
+            # Centre the figure + its box together on the fresh page.
+            avail = pdf.page_break_trigger - pdf.get_y()
+            unit = block + 42
+            pdf.ln(max(0, (avail - unit) / 2 - 3))
     x = pdf.l_margin + (EPW - disp_w) / 2
     pdf.ln(3)
     pdf.image(path, x=x, w=disp_w)
@@ -271,7 +281,7 @@ def render_image(path, caption=None, chapter_end=False):
         pdf.set_font("Body", "I", 11)
         pdf.set_text_color(*GREY)
         pdf.set_x(pdf.l_margin)
-        pdf.multi_cell(EPW, 5.4, f"Figure {FIG['n']}: {cap_desc}", align="C",
+        pdf.multi_cell(EPW, 5.4, f"Figure {FIG['n']}. {cap_desc}", align="C",
                        new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.ln(3)
     pdf.set_text_color(*BLACK)
@@ -338,6 +348,48 @@ def render_cards(cards):
         x += cw + gap
     pdf.set_y(y0 + ch)
     pdf.ln(5)
+    pdf.set_text_color(*BLACK)
+
+
+def render_insights(title, items):
+    """A shaded box with a navy accent bar and a short bulleted insight list."""
+    pad = 4.0
+    bar = 3.0
+    inner_w = EPW - bar - 2 * pad
+    bw = 5.0
+    lh = 5.6
+    th = (wrapped_lines(title, inner_w, "Head", "B", 12) * 6.4) if title else 0
+    heights = [wrapped_lines(_md_to_plain_marked(it), inner_w - bw, "Body", "", 11,
+                             markdown=True) * lh for it in items]
+    h = pad + th + (2 if title else 0) + sum(heights) + len(items) * 1.3 + pad
+    if pdf.get_y() + h + 6 > pdf.page_break_trigger:
+        pdf.add_page()
+    pdf.ln(2)
+    y0 = pdf.get_y()
+    pdf.set_fill_color(*ROW_ALT)
+    pdf.rect(pdf.l_margin, y0, EPW, h, style="F")
+    pdf.set_fill_color(*NAVY)
+    pdf.rect(pdf.l_margin, y0, bar, h, style="F")
+    tx = pdf.l_margin + bar + pad
+    cy = y0 + pad
+    if title:
+        pdf.set_xy(tx, cy)
+        pdf.set_font("Head", "B", 12)
+        pdf.set_text_color(*NAVY)
+        pdf.multi_cell(inner_w, 6.4, title, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        cy = pdf.get_y() + 2
+    for it, ih in zip(items, heights):
+        pdf.set_xy(tx, cy)
+        pdf.set_font("Body", "", 11)
+        pdf.set_text_color(*NAVY)
+        pdf.cell(bw, lh, "\u2022")
+        pdf.set_xy(tx + bw, cy)
+        pdf.set_text_color(*BLACK)
+        pdf.multi_cell(inner_w - bw, lh, _md_to_plain_marked(it), markdown=True,
+                       new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        cy += ih + 1.3
+    pdf.set_y(y0 + h)
+    pdf.ln(4)
     pdf.set_text_color(*BLACK)
 
 
@@ -460,9 +512,12 @@ def build(toc_pages):
             k = i + 1
             while k < len(lines) and (lines[k].strip() == "" or lines[k].strip() == "---"):
                 k += 1
-            chapter_end = (k >= len(lines)) or lines[k].strip().startswith("# ")
+            nxt = lines[k].strip() if k < len(lines) else ""
+            chapter_end = (k >= len(lines)) or nxt.startswith("# ")
+            followed_by_box = nxt.startswith(":::")
             if os.path.exists(img_path):
-                render_image(img_path, caption, chapter_end=chapter_end)
+                render_image(img_path, caption, chapter_end=chapter_end,
+                             followed_by_box=followed_by_box)
             i += 1
             continue
 
@@ -489,6 +544,20 @@ def build(toc_pages):
                 i += 1
             if cards:
                 render_cards(cards)
+            i += 1
+            continue
+
+        if stripped.startswith(":::insights"):
+            title = stripped[len(":::insights"):].strip() or "Key Insights"
+            items = []
+            i += 1
+            while i < len(lines) and lines[i].strip() != ":::":
+                s = lines[i].strip()
+                if s:
+                    items.append(re.sub(r"^[-*\u2022]\s*", "", s))
+                i += 1
+            if items:
+                render_insights(title, items)
             i += 1
             continue
 
